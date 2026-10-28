@@ -242,6 +242,10 @@ func dumpOrgConfig(client dumpClient, orgName string, ignoreSecretTeams bool, ig
 	drp := github.RepoPermissionLevel(meta.DefaultRepositoryPermission)
 	out.Metadata.DefaultRepositoryPermission = &drp
 	out.Metadata.MembersCanCreateRepositories = &meta.MembersCanCreateRepositories
+	out.Metadata.MembersCanCreatePublicRepositories = &meta.MembersCanCreatePublicRepositories
+	out.Metadata.MembersCanCreatePrivateRepositories = &meta.MembersCanCreatePrivateRepositories
+	out.Metadata.MembersCanForkPrivateRepositories = &meta.MembersCanForkPrivateRepositories
+	out.Metadata.WebCommitSignoffRequired = &meta.WebCommitSignoffRequired
 
 	var runningAsAdmin bool
 	runningAs, err := client.BotUser()
@@ -1112,6 +1116,10 @@ func configureOrgMeta(client orgMetadataClient, orgName string, want org.Metadat
 	change = updateBool(&cur.HasOrganizationProjects, want.HasOrganizationProjects) || change
 	change = updateBool(&cur.HasRepositoryProjects, want.HasRepositoryProjects) || change
 	change = updateBool(&cur.MembersCanCreateRepositories, want.MembersCanCreateRepositories) || change
+	change = updateBool(&cur.MembersCanCreatePublicRepositories, want.MembersCanCreatePublicRepositories) || change
+	change = updateBool(&cur.MembersCanCreatePrivateRepositories, want.MembersCanCreatePrivateRepositories) || change
+	change = updateBool(&cur.MembersCanForkPrivateRepositories, want.MembersCanForkPrivateRepositories) || change
+	change = updateBool(&cur.WebCommitSignoffRequired, want.WebCommitSignoffRequired) || change
 	if change {
 		if _, err := client.EditOrg(orgName, *cur); err != nil {
 			return fmt.Errorf("failed to edit %s metadata: %w", orgName, err)

@@ -31,6 +31,10 @@ orgs:
     has_repository_projects: true
     default_repository_permission: read
     members_can_create_repositories: false
+    members_can_create_public_repositories: false
+    members_can_create_private_repositories: false
+    members_can_fork_private_repositories: false
+    web_commit_signoff_required: false
 
     # org member settings
     members:

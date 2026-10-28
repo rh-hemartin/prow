@@ -1223,15 +1223,19 @@ type Organization struct {
 	BillingEmail string `json:"billing_email"`
 	Company      string `json:"company"`
 	// Email is publicly visible
-	Email                        string  `json:"email"`
-	Location                     string  `json:"location"`
-	Name                         string  `json:"name"`
-	Description                  string  `json:"description"`
-	HasOrganizationProjects      bool    `json:"has_organization_projects"`
-	HasRepositoryProjects        bool    `json:"has_repository_projects"`
-	DefaultRepositoryPermission  string  `json:"default_repository_permission"`
-	MembersCanCreateRepositories bool    `json:"members_can_create_repositories"`
-	Plan                         OrgPlan `json:"plan"`
+	Email                               string  `json:"email"`
+	Location                            string  `json:"location"`
+	Name                                string  `json:"name"`
+	Description                         string  `json:"description"`
+	HasOrganizationProjects             bool    `json:"has_organization_projects"`
+	HasRepositoryProjects               bool    `json:"has_repository_projects"`
+	DefaultRepositoryPermission         string  `json:"default_repository_permission"`
+	MembersCanCreateRepositories        bool    `json:"members_can_create_repositories"`
+	MembersCanCreatePublicRepositories  bool    `json:"members_can_create_public_repositories"`
+	MembersCanCreatePrivateRepositories bool    `json:"members_can_create_private_repositories"`
+	MembersCanForkPrivateRepositories   bool    `json:"members_can_fork_private_repositories"`
+	WebCommitSignoffRequired            bool    `json:"web_commit_signoff_required"`
+	Plan                                OrgPlan `json:"plan"`
 }
 
 // OrgPlan contains the Plan fields for the organization plan (free, gold, silver, medium...)
